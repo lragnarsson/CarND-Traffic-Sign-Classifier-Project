@@ -20,7 +20,7 @@
 
 ### Notebook
 
-A Jupyter notebook containing the code of this project can be found [here](https://github.com/l.ragnarsson/CarND-Traffic-Sign-Classifier-Project/blob/master/Traffic_Sign_Classifier.ipynb)
+A Jupyter notebook containing the code of this project can be found [here](https://github.com/lragnarsson/CarND-Traffic-Sign-Classifier-Project/blob/master/Traffic_Sign_Classifier.ipynb)
 
 ### Data Set Summary & Exploration
 
