@@ -18,12 +18,7 @@
 [image14]: ./images/result_probabilities_4.png "Probabilities, image 4"
 [image15]: ./images/result_probabilities_5.png "Probabilities, image 5"
 
-
-## Rubric Points
-### Here I will consider the [rubric points](https://review.udacity.com/#!/rubrics/481/view) individually and describe how I addressed each point in my implementation.  
-
----
-### Writeup
+### Notebook
 
 A Jupyter notebook containing the code of this project can be found [here](https://github.com/l.ragnarsson/CarND-Traffic-Sign-Classifier-Project/blob/master/Traffic_Sign_Classifier.ipynb)
 
@@ -83,21 +78,25 @@ Specifically, it has the following layers:
 
 #### 3. Training Approach
 
-To train the model, I used the AdamOptimizer with a learning rate of 0.0001 to minimize the cross entropy which was weighted to combat the effects of a skewed data set. Being incorrect on the less prevalent classes was punished higher in order to avoid having the network favoring high accuracy for only the most prevalent classes. The final model was trained with a batch size of 128 for 40 epochs.
+To train the model, I used the AdamOptimizer with a learning rate of 0.0001 to minimize the cross entropy which was weighted to combat the effects of a skewed data set. Being incorrect on the less prevalent classes was punished higher in order to avoid having the network favoring high accuracy for only the most prevalent classes. The final model was trained with a batch size of 128 for 50 epochs.
 
 Using dropout on the convolutional layers reduced the overall accuracy of the trained model which is why KEEP_RATE_CONV was set to 1.0. BETA was the coefficient used for the L2 norm to calculate the cost of having too large weights in the model.
 
 
 | Hyper Parameter  		|     Value	        | 
 |:---------------------:|:-----------------:| 
-| EPOCHS         		| 40   	            |
+| EPOCHS         		| 50   	            |
 | BATCH_SIZE         	| 128               |
 | LEARNING_RATE			| 0.001         	|
 | KEEP_RATE_CONV      	| 1.0   	    	|
-| KEEP_RATE_FC   	    | 0.6            	|
+| KEEP_RATE_FC   	    | 0.55            	|
 | BETA					| 0.0001	    	|
 
+In the figure below, the training and validation accuracy over 30 epochs can be seen when not using dropout, regularization or cost weighting. The large gap between training and validation accuracy and the fact that the training accuracy is very high are both signs of overfitting.
+
 ![Pre-processed Image Samples][image4]
+
+In the figure below all above mentioned methods are enabled and we can see that the validation accuracy reaches much higher.
 ![Pre-processed Image Samples][image5]
 
 #### 4. Method of Reaching the End Results
@@ -113,7 +112,7 @@ After this I went back to the standard Lennet architecture and converted the ima
 
 In order to investigate further improvements, I decided to tackle the problem of a skewed data set by weighting the cost of failing at different classes based on their relative prevalance in the training and testing datasets. At first glance, one might think that this would have a negative effect on the accuracy because we areno longer just optimizing to maximize it. And indeed this method seems to lower the training accuracy. However it lead to quite a large improvement in validation accuracy since the skew of that dataset might be different than that of the training data set.
 
-The last method tried was to add dropout to the convolutional layers and first two fully connected layers in the model. When using a keep rate of 60 % for both the convolutional and the fully connected layers together with the other methods described above the model was able to achieve a validation accuracy upwards of 96 %.
+The last method tried was to add dropout to the convolutional layers and first two fully connected layers in the model. When using a keep rate of 60 % for both the convolutional and the fully connected layers together with the other methods described above the model was able to achieve a validation accuracy upwards of 97 %.
 
 #### 5. Results
 
